@@ -1,0 +1,37 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+<div class="container d-flex justify-content-center mt-5"> {# Ajout de mt-5 pour ajouter une marge supérieure #}
+    <div class="col-lg-8">
+        <h1 class="mb-4">Catégories</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categorie in categories %}
+                <tr>
+                    <td>{{ categorie.idCategorie }}</td>
+                    <td>{{ categorie.nomcategorie }}</td>
+                    <td>
+                        <a href="{{ path('app_categorie_show', {'id_categorie': categorie.idCategorie}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('app_categorie_edit', {'id_categorie': categorie.idCategorie}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_categorie_new') }}" class="btn btn-success">Créer une nouvelle catégorie</a>
+    </div>
+</div>
+{% endblock %}

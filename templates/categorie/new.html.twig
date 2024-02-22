@@ -1,0 +1,26 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5"> {# Ajout de mt-5 pour ajouter une marge supérieure #}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Create new Category</div>
+
+                <div class="card-body">
+                    <form method="post" action="{{ path('app_categorie_new') }}">
+                        {{ form_widget(form) }}
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">Back to list</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

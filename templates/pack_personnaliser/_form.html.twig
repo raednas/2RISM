@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                {{ form_label(form.pack, 'Pack', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.pack, {'attr': {'class': 'form-control', 'placeholder': 'Enter pack'}}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                {{ form_label(form.programme, 'Programme', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.programme, {'attr': {'class': 'form-control', 'placeholder': 'Enter programme'}}) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}
