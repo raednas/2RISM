@@ -1,0 +1,51 @@
+{% extends '/back/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center">{{ pack_personnaliser.pack.getNomPack() }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="font-weight-bold">Pack Details:</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>ID:</strong> {{ pack_personnaliser.pack.id_pack }}</li>
+                                    <li><strong>Description:</strong> {{ pack_personnaliser.pack.Descriptionpack }}</li>
+                                    <li><strong>Prix:</strong> {{ pack_personnaliser.pack.prix }}</li>
+                                    <li><strong>Date:</strong> {{ pack_personnaliser.pack.date ? pack_personnaliser.pack.date|date('Y-m-d') : 'N/A' }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="font-weight-bold">Programme Details:</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>ID:</strong> {{ pack_personnaliser.programme.id_prog }}</li>
+                                    <li><strong>Image du Programme:</strong> {{ pack_personnaliser.programme.image }}</li>
+                                    <li><strong>Durée:</strong> {{ pack_personnaliser.programme.duree ? pack_personnaliser.programme.duree|date('Y-m-d H:i:s') : 'N/A' }}</li>
+                                    <li><strong>Description:</strong> {{ pack_personnaliser.programme.descriptionProgramme }}</li>
+                                    <li><strong>Catégorie:</strong> {{ pack_personnaliser.programme.categorie.nom }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            {% if pack_personnaliser.pack.image %}
+                                <img src="{{ asset('uploads/images/' ~ pack_personnaliser.pack.image) }}" alt="Pack Image" class="img-fluid mt-3" style="max-width: 70%">
+                            {% else %}
+                                <p class="text-muted mt-3">No image available</p>
+                            {% endif %}
+                            <div class="mt-3">
+                                <a href="{{ path('app_pack_personnaliser_index') }}" class="btn btn-secondary">Back to List</a>
+                                <a href="{{ path('app_pack_personnaliser_edit', {'idPackPersonnaliser': pack_personnaliser.idPackPersonnaliser}) }}" class="btn btn-primary">Edit</a>
+                                {{ include('pack_personnaliser/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

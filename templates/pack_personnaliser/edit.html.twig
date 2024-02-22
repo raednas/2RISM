@@ -1,0 +1,37 @@
+{% extends '/back/base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Edit Pack Personnaliser</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <input type="text" class="form-control" value="{{ pack_personnaliser.idPackPersonnaliser }}" disabled>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pack" class="form-label">Pack:</label>
+                        {{ form_widget(form.pack, {'attr': {'class': 'form-control', 'placeholder': 'Enter pack'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="programme" class="form-label">Programme:</label>
+                        {{ form_widget(form.programme, {'attr': {'class': 'form-control', 'placeholder': 'Enter programme'}}) }}
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

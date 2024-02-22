@@ -1,0 +1,53 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5 mb-4 text-center">Programme index</h1>
+
+        {% if programmes is empty %}
+            <p class="text-center">No records found</p>
+        {% else %}
+            <div class="d-flex justify-content-center">
+                <table class="table table-bordered text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Description Programme</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Durée</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for programme in programmes %}
+                            <tr>
+                                <td>{{ programme.id_prog }}</td>
+                                <td>{{ programme.descriptionProgramme }}</td>
+                                <td>
+                                    <div>
+                                        {% if programme.image %}
+                                            <img src="{{ asset('uploads/images/' ~ programme.image) }}" alt="Image" width="400">
+                                        {% else %}
+                                            No image
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>{{ programme.duree ? programme.duree|date('Y-m-d H:i:s') : 'N/A' }}</td>
+                                <td>{{ programme.categorie ? programme.categorie : 'N/A' }}</td>
+                                <td>
+                                    <a href="{{ path('app_programme_show', {'id': programme.id_prog}) }}" class="btn btn-info btn-sm">Show</a>
+                                    <a href="{{ path('app_programme_edit', {'id': programme.id_prog}) }}" class="btn btn-primary btn-sm">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        <div class="text-center">
+            <a href="{{ path('app_programme_new') }}" class="btn btn-success">Create new</a>
+        </div>
+    </div>
+{% endblock %}
