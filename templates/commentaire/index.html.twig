@@ -1,0 +1,44 @@
+{% extends '/back/baseBack.html.twig' %}
+{% block body %}
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                        <h1>Commentaire index</h1>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Commentaire</th>
+                                    <th>Date_c</th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for commentaire in commentaires %}
+                                <tr>
+                                    <td>{{ commentaire.idcommentaire }}</td>
+                                    <td>{{ commentaire.commentaire }}</td>
+                                    <td>{{ commentaire.dateC ? commentaire.dateC|date('Y-m-d H:i:s') : '' }}</td>
+                                    
+                                    <td>
+                                        {{ include('commentaire/_delete_form.html.twig') }}
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="4">no records found</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Détails du Post{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header>
+            <h1 class="text-center" style="margin-top: 180px;">Détails du Post</h1>
+        </header>
+
+        <section class="details-section">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <article class="card bg-light mb-4">
+                        <header class="card-header bg-primary text-white">
+                            <!-- You can add a title here if needed -->
+                        </header>
+                        <div class="card-body text-center">
+                            {% if post.image_p %}
+                                <img src="{{ asset('uploads/images/' ~ post.image_p) }}" alt="Image" class="img-fluid rounded mb-4 border border-primary mx-auto d-block" width="300">
+                            {% endif %}
+                            <div class="post-details">
+                                <p class="post-description">{{ post.description }}</p>
+                                <p><strong>Date:</strong> {{ post.dateP ? post.dateP|date('Y-m-d') : '' }}</p>
+                            </div>
+                        </div>
+                        <footer class="card-footer bg-light">
+                            <p class="post-date text-muted">{{ post.dateP ? post.dateP|date('Y-m-d') : '' }}</p>
+                            <div class="text-center mt-3">
+                                <a href="{{ path('app_blog_index') }}" class="btn btn-outline-primary mr-2">Retour au blog</a>
+                            </div>
+                        </footer>
+                    </article>
+
+                    <!-- Display existing comments -->
+                    <h2>Commentaires</h2>
+                    {% for commentaire in post.commentaires %}
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <p>{{ commentaire.commentaire }}</p>
+                                <small>{{ commentaire.datec ? commentaire.datec|date('Y-m-d H:i:s') : '' }}</small>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Comment form -->
+                    <h2>Ajouter un Commentaire</h2>
+                    <form method="post" action="{{ path('commenter_new', {'id': post.idpost}) }}">
+                        {{ form_start(form) }}
+                        {{ form_row(form.commentaire, {'attr': {'class': 'form-control', 'placeholder': 'Votre commentaire...'}}) }}
+                        {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                        {{ form_row(form.post_id) }}
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

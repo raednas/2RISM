@@ -1,0 +1,27 @@
+{% block body %}
+    <div class="form-container">
+        <h1>Create New Post</h1>
+
+        <div class="form-wrapper">
+            {{ form_start(form) }}
+            <div class="form-field">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-input'}}) }}
+            </div>
+            <div class="form-field">
+                {{ form_label(form.hashtag) }}
+                {{ form_widget(form.hashtag, {'attr': {'class': 'form-input'}}) }}
+            </div>
+           
+            <div class="form-field">
+                {{ form_label(form.image_p) }}
+                {{ form_widget(form.image_p, {'attr': {'class': 'form-input'}}) }}
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                <a href="{{ path('app_post_index') }}" class="btn btn-secondary">Back to List</a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
