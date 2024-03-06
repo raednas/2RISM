@@ -14,6 +14,14 @@
             border-radius: 5px; /* Arrondi les coins du message d'erreur */
             margin-top: 5px; /* Marge supérieure pour l'espace entre le message d'erreur et le champ de saisie */
         }
+
+        .text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
     </style>
 
     <div class="container my-5">
@@ -43,6 +51,9 @@
                             </div>
                             <div class="col-md-12">
                                 {{ form_row(form.Image, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                           <div class="col-md-12">
+                               {{ form_row(form.disponible, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Save</button>

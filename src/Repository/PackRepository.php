@@ -1,19 +1,10 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Pack;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Pack>
- *
- * @method Pack|null find($id, $lockMode = null, $lockVersion = null)
- * @method Pack|null findOneBy(array $criteria, array $orderBy = null)
- * @method Pack[]    findAll()
- * @method Pack[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class PackRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,28 +12,33 @@ class PackRepository extends ServiceEntityRepository
         parent::__construct($registry, Pack::class);
     }
 
-//    /**
-//     * @return Pack[] Returns an array of Pack objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Recherche les packs par nom.
+     *
+     * @param string $name Le nom à rechercher
+     * @return Pack[] Les packs correspondant au nom
+     */
+    public function findByNomPack(string $name): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nomPack LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Pack
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Recherche les packs par type.
+     *
+     * @param string $type Le type à rechercher
+     * @return Pack[] Les packs correspondant au type
+     */
+    public function findByTypePack(string $type): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.typePack = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -24,7 +24,7 @@
                         <h5 class="card-title mb-4 text-center">Create New Pack</h5>
                         {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
                             <div class="col-md-12">
-                               {{ form_row(form.Nom_pack, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.Nom_pack, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="col-md-12">
                                 {{ form_row(form.Type_pack, {'attr': {'class': 'form-control'}}) }}
@@ -43,6 +43,9 @@
                             </div>
                             <div class="col-md-12">
                                 {{ form_row(form.Image, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                           <div class="col-md-12">
+                               {{ form_row(form.disponible, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Save</button>
