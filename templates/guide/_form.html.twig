@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.Nom_Guide) }}
+        {{ form_widget(form.Nom_Guide, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.Prenom_Guide) }}
+        {{ form_widget(form.Prenom_Guide, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.Age_Guide) }}
+        {{ form_widget(form.Age_Guide, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.Sexe_Guide) }}
+        {{ form_widget(form.Sexe_Guide, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

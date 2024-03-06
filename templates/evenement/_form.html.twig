@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.type_event) }}
+        {{ form_widget(form.type_event, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.duree_event) }}
+        {{ form_widget(form.duree_event, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.date_event) }}
+        {{ form_widget(form.date_event, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.nom_event) }}
+        {{ form_widget(form.nom_event, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

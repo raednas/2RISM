@@ -1,0 +1,29 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-4">Evenement Disponible</h1>
+
+        <div class="row justify-content-center">
+            {% for evenement in evenements %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+    <div class="card-body" style="display: flex; flex-direction: column; align-items: center;">
+        <h5 class="card-title" style="margin-bottom: 50px; color: purple;"><strong>{{ evenement.nomEvent }}</strong></h5>
+        <p class="card-text" style="text-align: center;"><strong>Type_event:</strong> {{ evenement.typeEvent }}</p>
+        <p class="card-text" style="text-align: center;"><strong>Duree_event:</strong> {{ evenement.dureeEvent }}</p>
+        <p class="card-text" style="text-align: center;"><strong>Date_event:</strong> {{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d') : '' }}</p>
+        <a href="{{ path('app_evenement_show', {'id_event': evenement.idEvent}) }}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px;">Show</a>
+    </div>
+</div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <p class="text-center">No records found.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
