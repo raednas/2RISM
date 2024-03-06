@@ -1,0 +1,17 @@
+
+
+{% block content %}
+    
+    <script>
+        var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("message") }}',
+            introMessage: 'Bonjour! Je suis le bot de 2RISM. Comment puis-je vous aider aujourd\'hui?',
+            title: '2RISM Chatbot', 
+            mainColor: '#00A6ED', // Couleur principale personnalisée
+            bubbleBackground: '#f0f0f0', // Couleur de fond des bulles de chat personnalisée
+            aboutText: 'Chat avec 2RISM' // Texte personnalisé pour la section "À propos" du widget
+        };
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+{% endblock %}

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New ReservationPack</title>
+
+{% block body %}
+    <h1>Create new ReservationPack</h1>
+
+    {{ include('reservation_pack/_form.html.twig') }}
+
+    <a href="{{ path('app_reservation_pack_index') }}">back to list</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Entity;
+
 use App\Entity\Typepack;
 use App\Repository\PackRepository;
 use Doctrine\DBAL\Types\Types;
@@ -9,39 +9,88 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PackRepository::class)]
 class Pack
 {
-    #[ORM\Id] // Annotation pour indiquer que cette propriété est une clé primaire
-    #[ORM\GeneratedValue] // Annotation pour indiquer que la valeur de cette propriété est générée automatiquement
-    #[ORM\Column] // Annotation pour indiquer que cette propriété est mappée à une colonne de la table
-    private ?int $id_pack = null; // Déclaration de la propriété avec un type nullable (int)
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "id_pack", type: "integer")]
+    public ?int $id_pack = null;
 
-    #[ORM\Column(length: 255)] // Annotation pour indiquer les détails de la colonne dans la base de données
-    private ?string $nom_pack = null; // Déclaration de la propriété avec un type nullable (string)
+    #[ORM\Column(length: 255)]
+    public ?string $nom_pack = null;
 
-    #[ORM\Column(length: 255)] // Annotation pour indiquer les détails de la colonne dans la base de données
-    private ?string $Description_pack = null; // Déclaration de la propriété avec un type nullable (string)
+    #[ORM\Column(length: 255)]
+    public ?string $description_pack = null;
 
-    #[ORM\Column] // Annotation pour indiquer les détails de la colonne dans la base de données
-    private ?float $Prix = null; // Déclaration de la propriété avec un type nullable (float)
+    #[ORM\Column(type: "float")]
+    public ?float $prix = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)] // Annotation pour indiquer les détails de la colonne dans la base de données
-    private ?\DateTimeInterface $Date = null; // Déclaration de la propriété avec un type nullable (\DateTimeInterface)
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    public ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255)] // Annotation pour indiquer les détails de la colonne dans la base de données
-    private ?string $Image = null; // Déclaration de la propriété avec un type nullable (string)
+    #[ORM\Column(length: 255)]
+    public ?string $image = null;
 
-    #[ORM\ManyToOne(targetEntity: Typepack::class)] // Annotation pour indiquer la relation ManyToOne avec l'entité Typepack
-    #[ORM\JoinColumn(name: "id_typepack", referencedColumnName: "id_typepack", nullable: false)] // Annotation pour configurer la jointure
-    private ?Typepack $Type_pack = null; // Déclaration de la propriété avec un type nullable (Typepack)
+    #[ORM\ManyToOne(targetEntity: Typepack::class)]
+    #[ORM\JoinColumn(name: "id_typepack", referencedColumnName: "id_typepack", nullable: false)]
+    public ?Typepack $typePack = null;
 
-    // Les autres méthodes de l'entité Pack...
+    // Getters and setters
 
-    // Méthodes getters et setters pour accéder et définir les valeurs des propriétés
-
-    public function getId_pack(): ?int
+    public function getIdPack(): ?int
     {
         return $this->id_pack;
     }
 
+
+
+    #[ORM\Column(type: "boolean")]
+    public ?bool $disponible = true; // Par défaut, le pack est disponible
+
+    // Getters and setters
+
+    public function isDisponible(): ?bool
+    {
+        return $this->disponible;
+    }
+
+    public function setDisponible(bool $disponible): self
+    {
+        $this->disponible = $disponible;
+        return $this;
+    }
+
+    
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+        return $this;
+    }
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
     public function getNomPack(): ?string
     {
         return $this->nom_pack;
@@ -56,66 +105,43 @@ class Pack
 
     public function getDescriptionPack(): ?string
     {
-        return $this->Description_pack;
+        return $this->description_pack;
     }
 
-    public function setDescriptionPack(string $Description_pack): static
+    public function setDescriptionPack(string $description_pack): static
     {
-        $this->Description_pack = $Description_pack;
+        $this->description_pack = $description_pack;
 
         return $this;
     }
 
-    public function getPrix(): ?float
-    {
-        return $this->Prix;
-    }
-
-    public function setPrix(float $Prix): static
-    {
-        $this->Prix = $Prix;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->Date;
-    }
-
-    public function setDate(\DateTimeInterface $Date): static
-    {
-        $this->Date = $Date;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->Image;
-    }
-
-    public function setImage(string $Image): static
-    {
-        $this->Image = $Image;
-
-        return $this;
-    }
+    // Autres getters et setters...
 
     public function getTypePack(): ?string
     {
-        return $this->Type_pack ? $this->Type_pack->getNomTypePack() : null;
+        return $this->typePack ? $this->typePack->getNomTypePack() : null;
     }
 
-    public function setTypePack(?Typepack $Type_pack): static
+    public function setTypePack(?Typepack $typePack): static
     {
-        $this->Type_pack = $Type_pack;
+        $this->typePack = $typePack;
 
         return $this;
     }
-    public function __toString()
+
+    public function __toString(): string
     {
-        // Return the name of the pack
-        return $this->getNomPack(); 
+        return $this->getNomPack() ?? ''; // Retourne le nom du pack, ou une chaîne vide si le nom n'est pas défini.
+    }
+
+    public function getPrixColor(): string
+    {
+        if ($this->prix < 50) {
+            return 'prix-bas';
+        } elseif ($this->prix < 100) {
+            return 'prix-moyen';
+        } else {
+            return 'prix-eleve';
+        }
     }
 }

@@ -1,0 +1,330 @@
+{% extends 'front/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Styles pour le cadre et le contour */
+        .content-container {
+            border: 1px solid #ccc; /* Couleur du contour */
+            border-radius: 10px; /* Arrondi des coins */
+            padding: 20px; /* Espacement à l'intérieur du cadre */
+        }
+
+        /* Taille fixe pour les images des cartes */
+        .card-img-top {
+            object-fit: cover;
+            height: 200px; /* Hauteur fixe pour toutes les images */
+        }
+
+        /* Limite la longueur de la description */
+        .card-description {
+            max-height: 80px; /* Limite la hauteur à 80px */
+            overflow: hidden; /* Cache le texte dépassant */
+        }
+        
+        /* Fixer la taille des cartes */
+        .card {
+            height: 400px; /* Hauteur fixe pour toutes les cartes */
+        }
+
+        /* Styles pour la case à cocher */
+        .form-check-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.5); /* Couleur de fond */
+            padding: 5px 10px; /* Espacement interne */
+            border-radius: 5px; /* Arrondi des coins */
+        }
+
+        .form-check-label:hover {
+            background-color: rgba(255, 255, 255, 0.8); /* Couleur de fond au survol */
+        }
+
+        /* Marge pour les cartes */
+        .card {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Style pour le bouton sélectionné */
+        .selected-button {
+            background-color: green !important;
+            color: white !important;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+   <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center mb-4" style="margin-top: 140px;">Consulter nos packs et programmes !</h1>
+            </div>
+            
+        </div>
+
+        <!-- Champ de sélection de la période de réservation -->
+<div class="row mb-3">
+    <div class="col-md-3">
+        <label for="dateDebut" class="form-label">Date de début de la réservation :</label>
+        <input type="date" class="form-control" id="dateDebut" name="dateDebut" required>
+    </div>
+    <div class="col-md-3">
+        <label for="dateFin" class="form-label">Date de fin de la réservation :</label>
+        <input type="date" class="form-control" id="dateFin" name="dateFin" required>
+    </div>
+    <div class="col-md-3">
+        <label for="budget" class="form-label">Budget (DT) :</label>
+        <input type="number" class="form-control" id="budget" placeholder="Entrez votre budget" value="">
+    </div>
+    <div class="col-md-3">
+        <label for="result" class="form-label">Résultat :</label>
+        <input type="text" class="form-control" id="result" readonly>
+        <!-- Champ de résultat en lecture seule -->
+    </div>
+</div>
+<!-- Affichage du nombre de packs et programmes sélectionnés -->
+<div class="row mb-4"> <!-- Ajout de la classe mb-4 pour une marge inférieure plus grande -->
+    <div class="col-md-3">
+        <p class="mb-3">Nombre de packs sélectionnés : <span id="selected-packs-count">0</span></p>
+    </div>
+    <div class="col-md-3">
+        <p class="mb-3">Nombre de programmes sélectionnés : <span id="selected-programmes-count">0</span></p>
+    </div>
+</div>
+
+<!-- Boutons radio pour filtrer -->
+<div class="row mb-3">
+    <div class="col-md-3">
+        <div class="form-check">
+            <input class="form-check-input custom-radio" type="radio" id="filter-all" name="filter" checked>
+            <label class="form-check-label mb-3" for="filter-all">Tout afficher</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-check">
+            <input class="form-check-input custom-radio" type="radio" id="filter-packs" name="filter">
+            <label class="form-check-label mb-3" for="filter-packs">Afficher les packs</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-check">
+            <input class="form-check-input custom-radio" type="radio" id="filter-programmes" name="filter">
+            <label class="form-check-label mb-3" for="filter-programmes">Afficher les programmes</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-check">
+            <input class="form-check-input custom-radio" type="radio" id="filter-disponible" name="filter">
+            <label class="form-check-label mb-3" for="filter-disponible">Afficher les disponibles</label>
+        </div>
+    </div>
+</div>
+  
+
+
+
+
+        <!-- Affichage des packs -->
+        <div class="row" id="packs-container">
+            {% for pack in packs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card pack">
+                        <img src="{{ asset('uploads/images/' ~ pack.image) }}" class="card-img-top img-fluid">
+                        <div class="form-check">
+                            <input class="form-check-input custom-checkbox pack-checkbox" type="checkbox" id="pack_{{ pack.idPack }}" name="packs[]" value="{{ pack.idPack }}" data-price="{{ pack.prix }}" {% if not pack.disponible %}disabled{% endif %}>
+                            <label class="form-check-label" for="pack_{{ pack.idPack }}">Sélectionner ce pack</label>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pack.getNomPack() }}</h5>
+                            <p class="card-text card-description">Description Pack: {{ pack.descriptionPack }}</p>
+                            <p class="card-text">
+                                Prix:
+                                {% if pack.prix is not null %}
+                                    <span class="prix-cercle {{ pack.getPrixColor() }}">{{ pack.prix }}</span>.DT
+                                {% else %}
+                                    <span class="prix-cercle non-defini">Non défini</span>
+                                {% endif %} 
+                            </p>
+                            {% if not pack.disponible %}
+                                <p class="text-danger">Non disponible</p>
+                            {% else %}
+                                <p class="text-success">Disponible</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Affichage des programmes -->
+        <div class="row" id="programmes-container">
+            {% for programme in programmes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card programme">
+                        <img src="{{ asset('uploads/images/' ~ programme.image) }}" class="card-img-top img-fluid">
+                        <div class="form-check">
+                            <input class="form-check-input custom-checkbox programme-checkbox" type="checkbox" id="programme_{{ programme.id_prog }}" name="programmes[]" value="{{ programme.id_prog }}" data-price="{{ programme.prix }}" {% if not programme.disponible %}disabled{% endif %}>
+                            <label class="form-check-label" for="programme_{{ programme.id_prog }}">Sélectionner ce programme</label>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Catégorie: {{ programme.categorie.getNomcategorie() }}</p>
+                            <p class="card-text card-description">Description Programme: {{ programme.descriptionProgramme }}</p>
+                            <p class="card-text">
+                                Prix:
+                                {% if programme.prix is not null %}
+                                    <span class="prix-cercle {{ programme.getPrixColor() }}">{{ programme.prix }}</span>.DT
+                                {% else %}
+                                    <span class="prix-cercle non-defini">Non défini</span>
+                                {% endif %} 
+                            </p>
+                            {% if not programme.disponible %}
+                                <p class="text-danger">Non disponible</p>
+                            {% else %}
+                                <p class="text-success">Disponible</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% include 'chat/homepage.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+  
+
+    <script>
+      // Fonction pour mettre à jour le résultat
+function updateResult() {
+    var budgetInput = document.getElementById("budget");
+    var budget = parseFloat(budgetInput.value); // Récupérer le budget saisi par l'utilisateur
+    var totalPrix = 0; // Initialiser le total des prix des packs et programmes sélectionnés
+
+    // Récupérer tous les packs sélectionnés
+    var selectedPacks = document.querySelectorAll(".pack-checkbox:checked");
+    selectedPacks.forEach(function(pack) {
+        var packPrice = parseFloat(pack.dataset.price); // Récupérer le prix du pack
+        if (!isNaN(packPrice)) {
+            totalPrix += packPrice; // Ajouter le prix du pack au total
+        }
+    });
+
+    // Récupérer tous les programmes sélectionnés
+    var selectedProgrammes = document.querySelectorAll(".programme-checkbox:checked");
+    selectedProgrammes.forEach(function(programme) {
+        var programmePrice = parseFloat(programme.dataset.price); // Récupérer le prix du programme
+        if (!isNaN(programmePrice)) {
+            totalPrix += programmePrice; // Ajouter le prix du programme au total
+        }
+    });
+
+    // Calculer le résultat en soustrayant le total des prix du budget initial
+    var result = budget - totalPrix;
+
+    // Mettre à jour l'affichage du résultat
+    document.getElementById("result").value = result.toFixed(2); // Utilisez .value pour définir la valeur pour un champ de saisie
+}
+
+// Attacher les gestionnaires d'événements pour les changements de sélection des packs
+document.querySelectorAll(".pack-checkbox").forEach(function(checkbox) {
+    checkbox.addEventListener("change", function() {
+        updateResult(); // Mettre à jour le résultat à chaque changement de sélection
+    });
+});
+
+// Attacher les gestionnaires d'événements pour les changements de sélection des programmes
+document.querySelectorAll(".programme-checkbox").forEach(function(checkbox) {
+    checkbox.addEventListener("change", function() {
+        updateResult(); // Mettre à jour le résultat à chaque changement de sélection
+    });
+});
+
+
+ $(document).ready(function() {
+            $(".custom-radio").change(function() {
+                var selectedFilter = $(this).attr("id");
+
+                if (selectedFilter === "filter-all") {
+                    $(".pack").show();
+                    $(".programme").show();
+                } else if (selectedFilter === "filter-packs") {
+                    $(".pack").show();
+                    $(".programme").hide();
+                } else if (selectedFilter === "filter-programmes") {
+                    $(".pack").hide();
+                    $(".programme").show();
+                }
+            });
+        });
+
+
+
+          function updateSelectionCount() {
+    // Sélection des packs et programmes
+    var selectedPacks = document.querySelectorAll(".pack-checkbox:checked");
+    var selectedProgrammes = document.querySelectorAll(".programme-checkbox:checked");
+
+    // Compter le nombre de packs sélectionnés
+    var numberOfSelectedPacks = selectedPacks.length;
+
+    // Compter le nombre de programmes sélectionnés
+    var numberOfSelectedProgrammes = selectedProgrammes.length;
+
+    // Mettre à jour les compteurs de sélection
+    document.getElementById("selected-packs-count").textContent = numberOfSelectedPacks;
+    document.getElementById("selected-programmes-count").textContent = numberOfSelectedProgrammes;
+}
+
+$(document).ready(function() {
+    // Gérer les changements de sélection des packs
+    $(".pack-checkbox").change(function() {
+        updateSelectionCount(); // Mettre à jour les compteurs de sélection
+    });
+
+    // Gérer les changements de sélection des programmes
+    $(".programme-checkbox").change(function() {
+        updateSelectionCount(); // Mettre à jour les compteurs de sélection
+    });
+});
+
+
+    </script>
+
+ <script>
+     $(document).ready(function() {
+    $(".custom-radio").change(function() {
+        var selectedFilter = $(this).attr("id");
+
+        if (selectedFilter === "filter-all") {
+            $(".pack").show();
+            $(".programme").show();
+        } else if (selectedFilter === "filter-disponible") {
+            $(".pack").each(function() {
+                if ($(this).find(".text-success").length > 0) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+            $(".programme").each(function() {
+                if ($(this).find(".text-success").length > 0) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+});
+    </script>
+
+    
+{% endblock %}

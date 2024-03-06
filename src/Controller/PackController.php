@@ -137,7 +137,7 @@ public function edit(Request $request, Pack $pack): Response
     #[Route('/{id}', name: 'app_pack_delete', methods: ['POST'])]
     public function delete(Request $request, Pack $pack, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pack->getId_pack(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$pack->getIdpack(), $request->request->get('_token'))) {
             $entityManager->remove($pack);
             $entityManager->flush();
         }

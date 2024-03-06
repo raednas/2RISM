@@ -21,6 +21,7 @@
                             <p class="pack-description">{{ pack.DescriptionPack }}</p>
                             <p><strong>Type de Pack:</strong> {{ pack.TypePack }}</p>
                             <p><strong>Prix:</strong> {{ pack.Prix }}</p>
+                            <p><strong>Disponibilité:</strong> {% if pack.disponible %} Disponible {% else %} Non disponible {% endif %}</p> {# Utilisez pack.disponible pour accéder à la disponibilité #}
                         </div>
                     </div>
                     <footer class="card-footer bg-light">

@@ -19,17 +19,37 @@ class Programme
     #[ORM\Column(name: "duree", type: "datetime")]
     private ?\DateTimeInterface $duree = null;
 
+    #[ORM\Column(name: "prix", type: "float")]
+    private ?float $prix = null;
+
     #[ORM\Column(name: "description_programme")]
     private $descriptionProgramme;
 
     #[ORM\ManyToOne(targetEntity: Categorie::class)]
-    #[ORM\JoinColumn(name: "categorie_id", referencedColumnName: "id_categorie")]
+    #[ORM\JoinColumn(name: "id_categorie", referencedColumnName: "id_categorie")]
     private $categorie;
 
     public function getId_prog(): ?int
     {
         return $this->id_prog;
     }
+
+    #[ORM\Column(type: "boolean")]
+    public ?bool $disponible = true; // Par défaut, le programme est disponible
+
+    // Getters and setters
+
+    public function isDisponible(): ?bool
+    {
+        return $this->disponible;
+    }
+
+    public function setDisponible(bool $disponible): self
+    {
+        $this->disponible = $disponible;
+        return $this;
+    }
+
 
     public function getDescriptionProgramme(): ?string
     {
@@ -79,6 +99,17 @@ public function setNomDeCategorie(?Categorie $categorie): self
     return $this->categorie;
 }
 
+public function getPrix(): ?float
+{
+    return $this->prix;
+}
+
+public function setPrix(float $prix): self
+{
+    $this->prix = $prix;
+    return $this;
+}
+
 public function setCategorie(?Categorie $categorie): self
 {
     $this->categorie = $categorie;
@@ -88,5 +119,14 @@ public function setCategorie(?Categorie $categorie): self
 {
     return $this->getDescriptionProgramme() ?? ''; // Retourne la description du programme, ou une chaîne vide si la description n'est pas définie.
 }
-
+public function getPrixColor(): string
+    {
+        if ($this->prix < 50) {
+            return 'prix-bas';
+        } elseif ($this->prix < 100) {
+            return 'prix-moyen';
+        } else {
+            return 'prix-eleve';
+        }
+    }
 }

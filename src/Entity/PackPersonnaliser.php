@@ -4,6 +4,9 @@ namespace App\Entity;
 use App\Repository\PackPersonnaliserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+// Importer la classe Assert pour pouvoir utiliser l'annotation @Assert\Choice
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: PackPersonnaliserRepository::class)]
 class PackPersonnaliser
 {
@@ -19,7 +22,7 @@ class PackPersonnaliser
     #[ORM\ManyToOne(targetEntity: Programme::class)]
     #[ORM\JoinColumn(name: 'programme_id', referencedColumnName: 'id_prog')]
     private ?Programme $programme;
-
+    
     public function getIdPackPersonnaliser(): ?int
     {
         return $this->idPackPersonnaliser;
@@ -44,5 +47,9 @@ class PackPersonnaliser
     {
         $this->programme = $programme;
     }
-    
+
+    public function __toString(): string
+    {
+        return (string) $this->idPackPersonnaliser;
+    }
 }

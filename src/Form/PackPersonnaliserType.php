@@ -14,6 +14,7 @@ class PackPersonnaliserType extends AbstractType
         $builder
             ->add('pack')
             ->add('programme')
+            
         ;
     }
 
