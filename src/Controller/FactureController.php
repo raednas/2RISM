@@ -14,7 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/facture')]
 class FactureController extends AbstractController
 {
+<<<<<<< HEAD
     #[Route('/', name: 'app_facture_index', methods: ['GET'])]
+=======
+    #[Route('/app_facture_index', name: 'app_facture_index', methods: ['GET'])]
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     public function index(FactureRepository $factureRepository): Response
     {
         return $this->render('facture/index.html.twig', [

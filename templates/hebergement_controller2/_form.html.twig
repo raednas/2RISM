@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends '/back/base.html.twig' %}
 
 {% block body %}
@@ -22,6 +23,9 @@
                 <div class="card custom-form-background">
                     <div class="card-body">
                         <h5 class="card-title mb-4 text-center">Create New Pack</h5>{{ form_start(form, {'attr': {'class': 'my-form-class'}}) }}
+=======
+{{ form_start(form, {'attr': {'class': 'my-form-class'}}) }}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -35,6 +39,7 @@
                 {{ form_widget(form.emplacement, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
+<<<<<<< HEAD
          <div class="col-md-6">
             <div class="form-group">
                 {{ form_label(form.name, 'name', {'label_attr': {'class': 'form-label'}}) }}
@@ -47,6 +52,8 @@
                 {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -62,9 +69,12 @@
     </div>
     <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+<<<<<<< HEAD
   </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44

@@ -34,6 +34,7 @@ class Hebergement
     #[Assert\Length(max: 25)]
     private ?string $description = null;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -42,6 +43,8 @@ class Hebergement
     #[ORM\Column]
     private ?float $prix = null;
 
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     public function getId(): ?int
     {
         return $this->Id;
@@ -94,6 +97,7 @@ class Hebergement
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getName(): ?string
     {
@@ -120,4 +124,6 @@ class Hebergement
 
         return $this;
     }
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 }

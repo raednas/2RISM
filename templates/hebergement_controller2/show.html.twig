@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends '/back/base.html.twig' %}
 
 {% block title %}Hebergement Details{% endblock %}
@@ -55,4 +56,43 @@
         </div>
     </div>
 </div>
+=======
+{% extends 'back.html.twig' %}
+
+{% block title %}Hebergement{% endblock %}
+
+{% block body %}
+    <h1>Hebergement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hebergement.Id }}</td>
+            </tr>
+            <tr>
+                <th>Type_hebergement</th>
+                <td>{{ hebergement.typeHebergement }}</td>
+            </tr>
+            <tr>
+                <th>Emplacement</th>
+                <td>{{ hebergement.emplacement }}</td>
+            </tr>
+            <tr>
+                <th>Nbr_etoile</th>
+                <td>{{ hebergement.nbrEtoile }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ hebergement.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_hebergement_controller2_index') }}">back to list</a>
+
+    <a href="{{ path('app_hebergement_controller2_edit', {'Id': hebergement.Id}) }}">edit</a>
+
+    {{ include('hebergement_controller2/_delete_form.html.twig') }}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 {% endblock %}

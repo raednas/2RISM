@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 {% extends 'front/base.html.twig' %}
+=======
+{% extends 'front.html.twig' %}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 
 {% block title %}Hebergement index{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
     <div class="container">
         <h1 class="text-center mb-5">Hebergement Index</h1>
 
@@ -62,4 +67,30 @@
 
         {# <a href="{{ path('app_hebergement_controller2_new') }}" class="btn btn-warning">Create new</a> #}
     </div>
+=======
+    <h1>Hebergement index</h1>
+
+    <div class="row">
+    {% for hebergement in hebergements %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hebergement.typeHebergement }}</h5>
+                    <p class="card-text"><strong>Emplacement:</strong> {{ hebergement.emplacement }}</p>
+                    <p class="card-text"><strong>Nombre d'étoiles:</strong> {{ hebergement.nbrEtoile }}</p>
+                    <p class="card-text"><strong>Description:</strong> {{ hebergement.description }}</p>
+                    <a href="{{ path('app_hebergement_controller2_show', {'Id': hebergement.Id}) }}" class="btn btn-primary">Show</a>
+                    {# <a href="{{ path('app_hebergement_controller2_delete', {'Id': hebergement.Id}) }}" class="btn btn-danger">Delete</a> #}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col">
+            <p>No records found.</p>
+        </div>
+    {% endfor %}
+    </div>
+
+    {# <a href="{{ path('app_hebergement_controller2_new') }}" class="btn btn-warning">Create new</a> #}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 {% endblock %}

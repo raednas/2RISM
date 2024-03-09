@@ -23,8 +23,11 @@ class Hebergement1Type extends AbstractType
                 'placeholder' => 'type hebergement',
             ])
             ->add('emplacement')
+<<<<<<< HEAD
             ->add('name')
             ->add('prix')
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
             ->add('nbr_etoile')
             ->add('description', TextareaType::class, [
                 'attr' => ['rows' => 5], // Set rows to 3 for textarea

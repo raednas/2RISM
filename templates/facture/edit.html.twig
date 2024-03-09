@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 {% extends '/back/base.html.twig' %}
+=======
+{% extends 'back.html.twig' %}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 
 {% block title %}Edit Facture{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -37,4 +42,13 @@
         });
     });
 </script>
+=======
+    <h1>Edit Facture</h1>
+
+    {{ include('facture/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_facture_index') }}">back to list</a>
+
+    {{ include('facture/_delete_form.html.twig') }}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 {% endblock %}

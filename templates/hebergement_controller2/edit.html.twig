@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 {% extends '/back/base.html.twig' %}
+=======
+{% extends 'back.html.twig' %}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 
 {% block title %}Edit Hebergement{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
     <div>
         <div class="row justify-content-center">
             <div class="col-md-10"> <!-- Adjusted to col-md-10 for wider container -->
@@ -21,4 +26,13 @@
             </div>
         </div>
     </div>
+=======
+    <h1>Edit Hebergement</h1>
+
+    {{ include('hebergement_controller2/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_hebergement_controller2_index') }}">back to list</a>
+
+    {{ include('hebergement_controller2/_delete_form.html.twig') }}
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
 {% endblock %}

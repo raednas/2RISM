@@ -23,7 +23,11 @@ class HebergementController2Controller extends AbstractController
        
     }
 
+<<<<<<< HEAD
     #[Route('/app_front_index', name: 'app_front_indexa', methods: ['GET'])]
+=======
+    #[Route('/app_front_index', name: 'app_front_index', methods: ['GET'])]
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     public function index_front(HebergementRepository $hebergementRepository): Response
     {
          return $this->render('hebergement_controller2/howa.html.twig', [
@@ -60,6 +64,7 @@ class HebergementController2Controller extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
     #[Route('/show/{Id}', name: 'app_showlisting', methods: ['GET'])]
     public function showlisting(Hebergement $hebergement): Response
     {
@@ -68,6 +73,8 @@ class HebergementController2Controller extends AbstractController
         ]);
     }
 
+=======
+>>>>>>> 548d40ec88cd07c4e85f14ea41c71c280447db44
     #[Route('/{Id}/edit', name: 'app_hebergement_controller2_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Hebergement $hebergement, EntityManagerInterface $entityManager): Response
     {
