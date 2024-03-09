@@ -1,0 +1,47 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-4" style="color: orange;">Evenement Disponible</h1>
+
+        <div class="row justify-content-center">
+            {% for evenement in evenements %}
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: 0.3s; border: none; background-color: #6a1b9a; color: #fff; border-radius: 10px; overflow: hidden;">
+                        <div class="card-body" style="background-color: #9c27b0; padding: 20px; border-radius: 10px;">
+                            <table class="table table-bordered" style="color: #fff;">
+                                <tbody>
+                                 <tr>
+                                        <td><strong>NomType Event:</strong></td>
+                                        <td>{{ evenement.NomEvent }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Type Event:</strong></td>
+                                        <td>{{ evenement.typeEvent }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Duree Event:</strong></td>
+                                        <td>{{ evenement.dureeEvent }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date Event:</strong></td>
+                                        <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d') : '' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('app_evenements_pdf') }}" class="btn btn-outline-light btn-download-pdf" style="border-radius: 10px; margin-top: 10px;">Télécharger le PDF</a>
+                    <a href="{{ path('mailing', {'id_event': evenement.idEvent}) }}" class="btn btn-sm btn-success">Participer</a>
+
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <p class="text-center">No records found.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

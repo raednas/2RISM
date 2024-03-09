@@ -1,0 +1,105 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Hebergement Details{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .table-bordered th,
+        .table-bordered td {
+            border: 3px solid purple !important; /* Thicker purple border */
+        }
+
+        .table-bordered {
+            border: 3px solid purple !important; /* Thicker purple border */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4" style="color: orange;">Hebergement Details</h1>
+                     <div class="hotel_gallery">
+								<div class="hotel_slider_container">
+									<div class="owl-carousel owl-theme hotel_slider">
+										<!-- Hotel Gallery Slider Item -->
+										<div class="owl-item">
+											<a class="colorbox cboxElement" href="images/listing_9.jpg">
+												<img src="{{ asset('/front/images/offer_1.jpg') }}" alt="Description of the image" style="max-width: 100%; height: auto;">
+											</a>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+                            <!-- Title -->
+							<div class="hotel_title_container d-flex flex-lg-row flex-column">
+								<div class="hotel_title_content">
+									<h1 class="hotel_title">{{ hebergement.name}}</h1>
+                                    <h3 class="hotel_title">{{ hebergement.nbrEtoile}} etoiles</h3>
+									<div class="rating_r rating_r_4 hotel_rating">
+										<i></i>
+										<i></i>
+										<i></i>
+										<i></i>
+										<i></i>
+									</div>
+									<div class="hotel_location">{{hebergement.emplacement}}</div>
+								</div>
+								<div class="hotel_title_button ml-lg-auto text-lg-right">
+									<div class="button book_button trans_200"><a href="#">book<span></span><span></span><span></span></a></div>
+									
+								</div>
+							</div>
+
+							<!-- Hotel Info Text -->
+
+							<div class="hotel_info_text">
+								<p>{{ hebergement.description }}</p>
+							</div>
+
+							<!-- Hotel Info Tags -->
+
+							<div class="hotel_info_tags">
+								<ul class="hotel_icons_list">
+									<li class="hotel_icons_item"><img src="images/post.png" alt=""></li>
+									<li class="hotel_icons_item"><img src="images/compass.png" alt=""></li>
+									<li class="hotel_icons_item"><img src="images/bicycle.png" alt=""></li>
+									<li class="hotel_icons_item"><img src="images/sailboat.png" alt=""></li>
+								</ul>
+							</div>
+
+						</div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Type</th>
+                                    <td>{{ hebergement.typeHebergement }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Emplacement</th>
+                                    <td>{{ hebergement.emplacement }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Nombre d'étoiles</th>
+                                    <td>{{ hebergement.nbrEtoile }}</td>
+                                </tr>
+                                 <tr>
+                                    <th scope="row">name</th>
+                                    <td>{{ hebergement.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

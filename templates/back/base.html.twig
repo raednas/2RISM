@@ -22,7 +22,7 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo mr-5" href="{{asset('back/base.html.twig')}}"><img src="{{asset('back/images/logo.png')}}" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="{{asset('back/base.html')}}"><img src="{{asset('images/logo.png')}}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{{asset('back/base.html')}}"><img src="{{asset('back/images/logom.png')}}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -36,8 +36,19 @@
                   <i class="icon-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
+<input id="search-input" type="form-control" placeholder="Search...">
+      <title>AJAX Search Example</title>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $("#search-input").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+      </script>            </div>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
@@ -91,7 +102,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.jpg" alt="profile"/>
+              <img src="{{asset('back/images/admin.png')}}" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -137,12 +148,11 @@
             </a>
             <div class="collapse" id="PACK">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{path('app_pack_index')}}">pack_index</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{path('app_programme_index')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{path('app_pack_personnaliser_index')}}">Typography</a></li>
-              <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_typepack_index') }}">Index</a> <!-- Assurez-vous de remplacer 'route_to_index' par le nom de la route vers votre index -->
-        </li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_pack_index')}}">table pack </a></li>
+                <li class="nav-item">   <a class="nav-link" href="{{ path('app_typepack_index') }}">table type pack</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_programme_index')}}">table programme </a></li>
+                <li class="nav-item">   <a class="nav-link" href="{{ path('app_categorie_index') }}">table categorie programe</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_pack_personnaliser_index')}}">table pack personnaliser </a></li>
               </ul>
             </div>
           </li>
@@ -154,9 +164,10 @@
             </a>
             <div class="collapse" id="transport">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/buttons.html')}}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/dropdowns.html')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/typography.html')}}">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_vehicule_index')}}">Vehicules</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_locationvoitures_index')}}">Agence Location</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_reservation_index')}}">Reservation Voiture</a></li>
+                
               </ul>
             </div>
           </li>
@@ -168,9 +179,9 @@
             </a>
             <div class="collapse" id="blog">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/buttons.html')}}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/dropdowns.html')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/typography.html')}}">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_hebergement_controller2_index')}}">table post</a></li>
+                <li class="nav-item">   <a class="nav-link" href="{{path('app_facture_index')}}">commentaire</a></li>
+                
               </ul>
             </div>
           </li>
@@ -182,9 +193,8 @@
             </a>
             <div class="collapse" id="Utilisateur">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/buttons.html')}}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/dropdowns.html')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/typography.html')}}">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('backuser')}}">table evenement </a></li>
+                
               </ul>
             </div>
           </li>
@@ -196,11 +206,12 @@
             </a>
             <div class="collapse" id="evenement">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/buttons.html')}}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/dropdowns.html')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/typography.html')}}">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_evenement_index')}}">table evenement </a></li>
+                <li class="nav-item">   <a class="nav-link" href="{{path('app_guide_index')}}">table guide</a></li>
+                
               </ul>
             </div>
+            </a>
           </li>
             <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#Hebergement" aria-expanded="false" aria-controls="ui-basic">
@@ -210,13 +221,15 @@
             </a>
             <div class="collapse" id="Hebergement">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/buttons.html')}}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/dropdowns.html')}}">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{asset('back/pages/ui-features/typography.html')}}">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{path('app_hebergement_controller2_index')}}">table hebergement </a></li>
+                <li class="nav-item">   <a class="nav-link" href="{{path('app_facture_index')}}">table facture</a></li>
+                
               </ul>
             </div>
           </li>
           
+
+
         </ul>
       </nav>
  {% endblock %}

@@ -1,0 +1,53 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}agence location{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" style="margin-top: 40px; overflow-x: auto;">
+        <div class="table-container" style="margin-right: 300px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th class="align-middle" style="width: 150px;">nom agence</th> <!-- Définissez une largeur personnalisée -->
+                        <th class="align-middle" style="width: 150px;">adresse agence</th> <!-- Définissez une largeur personnalisée -->
+                        <th class="align-middle" style="width: 150px;">nombre de voitures dispo</th>
+                        <th class="align-middle" style="width: 150px;" >Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for locationvoiture in locationvoitures %}
+                        <tr>
+                            <td>{{ locationvoiture.id_agence }}</td>
+                            <td>{{ locationvoiture.nomagence }}</td>
+                            <td>{{ locationvoiture.adresseagence }}</td>
+                            <td>{{ locationvoiture.nbrvoituresdispo }}</td>
+                            
+                            <td>
+                                <a href="{{ path('app_locationvoitures_show', {'id_agence': locationvoiture.id_agence}) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ path('app_locationvoitures_edit', {'id_agence': locationvoiture.id_agence}) }}" class="btn btn-secondary">Edit</a>
+                                
+                                <form action="{{ path('app_locationvoitures_delete', {'id_agence': locationvoiture.id_agence}) }}" method="post" style="display: inline;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ locationvoiture.id_agence) }}">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a href="{{ path('app_locationvoitures_new') }}" class="btn btn-success">Create new</a>
+        </div>
+    </div>
+
+    
+{% endblock %}
+

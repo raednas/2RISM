@@ -1,38 +1,48 @@
-<!DOCTYPE html>
-
-<title>Programme</title>
+{% extends '/back/base.html.twig' %}
 
 {% block body %}
-    <h1>Programme</h1>
+    <div class="container-fluid" style="background-color: #f8f9fa;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="mb-4 text-center">Détails du Programme</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ programme.id_prog }}</td>
-            </tr>
-            <tr>
-                <th>Discription_programme</th>
-                <td>{{ programme.descriptionProgramme}}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ programme.image }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ programme.duree ? programme.duree|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Categorie</th>
-                <td>{{ programme.categorie }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        <dl class="row">
+                            <dt class="col-sm-3">Id</dt>
+                            <dd class="col-sm-9">{{ programme.id_prog }}</dd>
 
-    <a href="{{ path('app_programme_index') }}">back to list</a>
+                            <dt class="col-sm-3">Description</dt>
+                            <dd class="col-sm-9">{{ programme.descriptionProgramme }}</dd>
 
-    <a href="{{ path('app_programme_edit', {'id': programme.id_prog}) }}">edit</a>
+                            <dt class="col-sm-3">Image</dt>
+                            <dd class="col-sm-9">
+                                {% if programme.image %}
+                                    <img src="{{ asset('uploads/images/' ~ programme.image) }}" alt="Image" class="img-fluid rounded mb-4 border border-primary mx-auto d-block" width="300">
+                                {% else %}
+                                    <span>No image</span>
+                                {% endif %}
+                            </dd>
 
-    {{ include('programme/_delete_form.html.twig') }}
+                            <dt class="col-sm-3">Durée</dt>
+                            <dd class="col-sm-9">{{ programme.duree ? programme.duree|date('Y-m-d H:i:s') : 'N/A' }}</dd>
+
+                            <dt class="col-sm-3">Catégorie</dt>
+                            <dd class="col-sm-9">{{ programme.categorie ? programme.categorie.getNomCategorie() : 'N/A' }}</dd>
+                            
+                            <dt class="col-sm-3">Disponible</dt>
+                            <dd class="col-sm-9">{{ programme.disponible ? 'Oui' : 'Non' }}</dd> <!-- Displaying Yes or No based on availability -->
+
+                        </dl>
+
+                        <div class="text-center">
+                            <a href="{{ path('app_programme_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                            <a href="{{ path('app_programme_edit', {'id': programme.id_prog}) }}" class="btn btn-primary">Modifier</a>
+                            {{ include('programme/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

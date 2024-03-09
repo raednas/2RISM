@@ -1,0 +1,91 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}New Vehicule{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+
+                        <div class="form-group">
+                            {{ form_label(form.immatriculation, 'Immatriculation') }}
+                            {{ form_widget(form.immatriculation, {'attr': {'class': 'form-control custom-placeholder', 'placeholder': 'Exemple: 1234 TUNIS 5678', 'id': 'immatriculation'}}) }}
+                            {% if form_errors(form.immatriculation) %}
+                                <div class="error-message">{{ form_errors(form.immatriculation)|first }}</div>
+                            {% endif %}
+                        </div>
+
+                        <style>
+                        .error-message {
+                        color: red;
+                        font-size: 12px;
+                        margin-top: 5px;
+                        }
+
+                        .error-input {
+                        border-color: red;
+                        }
+                        </style>
+
+
+
+
+                        <div class="form-group">
+                            {{ form_label(form.modele) }}
+                            {{ form_widget(form.modele, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.modele) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.nbr_places) }}
+                            {{ form_widget(form.nbr_places, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.nbr_places) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.couleur) }}
+                            {{ form_widget(form.couleur, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.couleur) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.prixdelocation) }}
+                            {{ form_widget(form.prixdelocation, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.prixdelocation) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.locationvoitures) }}
+                            {{ form_widget(form.locationvoitures, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.locationvoitures) }}
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.image) }}
+                            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.image,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+
+                        {{ form_row(form._token) }}
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <a href="{{ path('app_vehicule_index') }}" class="btn btn-secondary">Back to list</a>
+                        </div>
+
+                        {{ form_end (form) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+

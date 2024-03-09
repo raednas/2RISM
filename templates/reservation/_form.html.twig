@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    
+    {{ form_label(form.datedebut, 'Date de Debut') }}
+    {{ form_widget(form.datedebut, {'attr': {'class': 'form-control', 'id': 'datedebut'}}) }}
+
+    {{ form_label(form.datefin, 'Date de fin') }}
+    {{ form_widget(form.datefin, {'attr': {'class': 'form-control', 'id': 'datefin'}}) }}
+
+    {{ form_label(form.idv, 'Vehicule') }}
+    {{ form_widget(form.idv, {'attr': {'class': 'form-control', 'id': 'idv'}}) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

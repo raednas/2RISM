@@ -1,0 +1,76 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}Pack{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" style="margin-top: 40px; overflow-x: auto;">
+        <div class="row">
+            <div class="col-md-3" style="padding-right: 20px;">
+                {# Ajoutez votre barre latérale ici #}
+            </div>
+            <div class="col-md-9">
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            
+                <th>Id_Guide</th>
+                <th>Nom_Guide</th>
+                <th>Prenom_Guide</th>
+                <th>Age_Guide</th>
+                <th>Sexe_Guide</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for guide in guides %}
+            <tr>
+                <td>{{ guide.idGuide }}</td>
+                <td>{{ guide.NomGuide }}</td>
+                <td>{{ guide.PrenomGuide }}</td>
+                <td>{{ guide.AgeGuide }}</td>
+                <td>{{ guide.SexeGuide }}</td>
+                <td>
+                    <a href="{{ path('app_guide_show', {'id_Guide': guide.idGuide}) }}" class="btn btn-primary" style="border-radius: 10px;">show</a>
+                    <a href="{{ path('app_guide_edit', {'id_Guide': guide.idGuide}) }}" class="btn btn-warning" style="border-radius: 10px;">edit</a>
+                    <a href="{{ path('app_guide_delete', {'id_Guide': guide.idGuide}) }} "class="btn btn-danger" style="border-radius: 10px;">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a href="{{ path('app_guide_new') }}" class="btn btn-success" style="border-radius: 10px;"><span class="bi bi-cart-plus"></span> Create new</a>
+    </div>
+
+
+    {# Manual pagination controls #}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if currentPage > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('app_guide_index', {'page': currentPage - 1}) }}">Previous</a>
+                </li>
+            {% endif %}
+
+            {% for page in 1..totalPages %}
+                <li class="page-item{% if page == currentPage %} active{% endif %}">
+                    <a class="page-link" href="{{ path('app_guide_index', {'page': page}) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if currentPage < totalPages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('app_guide_index', {'page': currentPage + 1}) }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+{% endblock %}

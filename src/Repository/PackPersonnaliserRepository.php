@@ -21,28 +21,40 @@ class PackPersonnaliserRepository extends ServiceEntityRepository
         parent::__construct($registry, PackPersonnaliser::class);
     }
 
-//    /**
-//     * @return PackPersonnaliser[] Returns an array of PackPersonnaliser objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @param string|null $searchTerm
+     * @return PackPersonnaliser[]
+     */
+    public function searchByCriteria(?string $searchTerm): array
+    {
+        $entityManager = $this->getEntityManager();
+        
+        $query = $entityManager->createQuery(
+            'SELECT pp
+            FROM App\Entity\PackPersonnaliser pp
+            JOIN pp.pack p
+            JOIN pp.programme pr
+            WHERE p.id_pack LIKE :searchTerm OR pr.id_prog LIKE :searchTerm'
+        )->setParameter('searchTerm', '%' . $searchTerm . '%');
+        
+        return $query->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?PackPersonnaliser
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function saveSelectedItems($selectedPacks, $selectedPrograms)
+    {
+        // Créez une nouvelle instance de l'entité PackPersonnaliser
+        $packPersonnaliser = new PackPersonnaliser();
+        $packPersonnaliser->setSelectedPacks($selectedPacks);
+        $packPersonnaliser->setSelectedPrograms($selectedPrograms);
+
+        // Persistez l'entité dans la base de données
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($packPersonnaliser);
+        $entityManager->flush();
+
+        // Retournez l'entité persistée
+        return $packPersonnaliser;
+    }
+
+    
 }

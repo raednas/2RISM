@@ -1,0 +1,20 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}nouvelle agence{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Contenu de la navbar -->
+            <!-- Vous pouvez ajouter le contenu de votre navbar ici -->
+        </nav>
+
+        <div class="text-center mt-4">
+            <h1>Ajouter nouvelle agence</h1>
+        </div>
+
+        {{ include('locationvoitures/_form.html.twig') }}
+
+        
+    </div>
+{% endblock %}

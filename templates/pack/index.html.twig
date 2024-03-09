@@ -19,6 +19,7 @@
                                 <th>Description Pack</th>
                                 <th>Prix</th>
                                 <th>Date</th>
+                                <th>Disponible</th> {# Ajout du champ Disponible #}
                                 <th>Image</th>
                                 <th>show</th>
                                 <th>edit</th>
@@ -30,10 +31,11 @@
                                 <tr>
                                     <td>{{ pack.id_pack }}</td>
                                     <td>{{ pack.getNomPack() }}</td>
-                                    <td>{{ pack.getTypePack() }}</td> {# Utilisez la méthode getTypePack() pour obtenir le nom du type de pack #}
+                                    <td>{{ pack.getTypePack() }}</td>
                                     <td>{{ pack.Descriptionpack }}</td>
                                     <td>{{ pack.Prix }}</td>
                                     <td>{{ pack.Date ? pack.Date|date('Y-m-d') : '' }}</td>
+                                    <td>{{ pack.Disponible ? 'Yes' : 'No' }}</td> {# Affichage Oui si disponible, sinon Non #}
                                     <td><img src="{{ asset('uploads/images/' ~ pack.Image) }}" alt="Image" width="200"></td>
                                     <td>
                                         <a href="{{ path('app_pack_show', {'id': pack.id_pack}) }}" class="btn btn-primary">Show</a>
@@ -51,7 +53,7 @@
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="10">No records found</td>
+                                    <td colspan="11">No records found</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -1,0 +1,63 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}Facture Details{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center mb-0">Facture Details</h1>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th class="text-center" style="width: 30%;">Id</th>
+                                    <td class="text-center">{{ facture.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Type</th>
+                                    <td class="text-center">{{ facture.type }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Date Debut</th>
+                                    <td class="text-center">{{ facture.DateDebut ? facture.DateDebut|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Date Fin</th>
+                                    <td class="text-center">{{ facture.DateFin ? facture.DateFin|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Prix</th>
+                                    <td class="text-center">{{ facture.prix }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Nom</th>
+                                    <td class="text-center">{{ facture.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Prenom</th>
+                                    <td class="text-center">{{ facture.prenom }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Adresse Mail</th>
+                                    <td class="text-center">{{ facture.AdresseMail }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{{ path('app_facture_index') }}" class="btn btn-secondary mr-2">Back to List</a>
+                        <a href="{{ path('app_facture_edit', {'id': facture.id}) }}" class="btn btn-primary mr-2">Edit</a>
+                        {{ include('facture/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

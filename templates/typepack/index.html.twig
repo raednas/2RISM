@@ -1,11 +1,12 @@
+{# back/typepack/index.html.twig #}
+
 {% extends 'back/base.html.twig' %}
 
 {% block body %}
-<div class="container mt-4">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des Types de Pack</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="text-center mb-4">Liste des Types de Pack</h1>
-
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -19,9 +20,16 @@
                     <tr>
                         <td>{{ typepack.idTypepack }}</td>
                         <td>{{ typepack.nomTypePack }}</td>
-                        <td>
-                            <a href="{{ path('app_typepack_show', {'id': typepack.idTypepack}) }}" class="btn btn-sm btn-info">Détails</a>
-                            <a href="{{ path('app_typepack_edit', {'id': typepack.idTypepack}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <td class="text-center">
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                <a href="{{ path('app_typepack_show', {'id': typepack.idTypepack}) }}" class="btn btn-sm btn-info">Détails</a>
+                                <a href="{{ path('app_typepack_edit', {'id': typepack.idTypepack}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                <form method="post" action="{{ path('app_typepack_delete', {'id': typepack.idTypepack}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce type de pack ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ typepack.idTypepack) }}">
+                                    
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     {% else %}

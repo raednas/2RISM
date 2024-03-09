@@ -1,0 +1,25 @@
+{% extends '/back/base_back.html.twig' %}
+
+{% block title %}edit agence{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Contenu de la navbar -->
+            <!-- Vous pouvez ajouter le contenu de votre navbar ici -->
+        </nav>
+
+        <div class="text-center mt-4">
+            <h1>Modification de l'agence</h1>
+        </div>
+
+        {{ include('locationvoitures/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <div class="text-center mt-3">
+            
+        </div>
+
+        {{ include('locationvoitures/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
+

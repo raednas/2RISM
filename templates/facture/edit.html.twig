@@ -1,0 +1,40 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}Edit Facture{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center mb-0">Edit Facture</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="text-center mb-4">
+                                {{ include('facture/_form.html.twig', {'button_label': 'Update'}) }}
+                            </div>
+                            <div class="text-center mt-4">
+                                <a href="{{ path('app_facture_index') }}" class="btn btn-primary mr-2">Back to List</a>
+                                {{ include('facture/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ensure that the calendar widget only displays dates that are not in the past
+    document.addEventListener('DOMContentLoaded', function() {
+        var dateInputs = document.querySelectorAll('.js-datepicker');
+        dateInputs.forEach(function(dateInput) {
+            dateInput.setAttribute('min', 'now|date("Y-m-d")');
+        });
+    });
+</script>
+{% endblock %}

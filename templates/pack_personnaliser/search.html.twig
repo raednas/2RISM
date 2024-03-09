@@ -1,0 +1,27 @@
+{% block content %}
+    <h1>Résultats de la recherche</h1>
+
+    <h2>Programmes par catégorie :</h2>
+    <ul>
+        {% for programme in response.programmesByCategorie %}
+            <li>{{ programme.nom }}</li>
+            <!-- Inclure d'autres propriétés nécessaires -->
+        {% endfor %}
+    </ul>
+
+    <h2>Packs par nom :</h2>
+    <ul>
+        {% for pack in response.packsByNom %}
+            <li>{{ pack.nom }}</li>
+            <!-- Inclure d'autres propriétés nécessaires -->
+        {% endfor %}
+    </ul>
+
+    <h2>Packs par type :</h2>
+    <ul>
+        {% for pack in response.packsByType %}
+            <li>{{ pack.nom }}</li>
+            <!-- Inclure d'autres propriétés nécessaires -->
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -7,6 +7,9 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "botman/botman": "^2.8",
+        "botman/driver-web": "^1.5",
+        "cboden/ratchet": "^0.4.4",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
@@ -23,6 +26,7 @@
         "symfony/flex": "^1.17|^2",
         "symfony/form": "5.4.*",
         "symfony/framework-bundle": "5.4.*",
+        "symfony/google-mailer": "5.4.*",
         "symfony/http-client": "5.4.*",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
@@ -43,8 +47,11 @@
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "tecnickcom/tcpdf": "^6.6",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^7.16",
+        "phpoffice/phpspreadsheet": "^1.17" 
     },
     "config": {
         "allow-plugins": {

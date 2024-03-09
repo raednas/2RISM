@@ -1,0 +1,24 @@
+{% extends '/back/base.html.twig' %}
+
+{% block title %}Edit Hebergement{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-md-10"> <!-- Adjusted to col-md-10 for wider container -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Edit Hebergement</h1>
+
+                        {{ include('hebergement_controller2/_form.html.twig', {'button_label': 'Update'}) }}
+
+                        <div class="text-center mt-3">
+                            <a href="{{ path('app_hebergement_controller2_index') }}" class="btn btn-secondary mr-2">Back to List</a>
+                            {{ include('hebergement_controller2/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

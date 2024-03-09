@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
@@ -69,11 +68,25 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/{id_categorie}', name: 'app_categorie_delete', methods: ['POST'])]
-    public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager, CategorieRepository $categorieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getIdcategorie(), $request->request->get('_token'))) {
-            $entityManager->remove($categorie);
-            $entityManager->flush();
+        try {
+            if ($this->isCsrfTokenValid('delete'.$categorie->getIdcategorie(), $request->request->get('_token'))) {
+                $entityManager->remove($categorie);
+                $entityManager->flush();
+            }
+        } catch (\PDOException $e) {
+            if ($e->getCode() === '23000') {
+                $errorMessage = "Impossible de supprimer la catégorie car elle est utilisée dans d'autres enregistrements.";
+                // Passer le message d'erreur au template Twig
+                return $this->render('categorie/index.html.twig', [
+                    'categories' => $categorieRepository->findAll(),
+                    'errorMessage' => $errorMessage,
+                ]);
+            } else {
+                // Gérez d'autres types d'erreurs de base de données ici
+                echo "Une erreur s'est produite : " . $e->getMessage();
+            }
         }
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
